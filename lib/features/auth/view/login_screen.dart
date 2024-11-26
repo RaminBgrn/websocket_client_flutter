@@ -72,10 +72,13 @@ class LoginScreen extends GetView<LoginViewModel> {
                         title: "I have not account",
                       ),
                       const Gap(10),
-                      SubmitButton(
-                        title: "Submit",
-                        onTap: controller.onSubmitTap,
-                      ),
+                      GetBuilder<LoginViewModel>(builder: (ctl) {
+                        return SubmitButton(
+                          title: "Submit",
+                          onTap: controller.onSubmitTap,
+                          loadingFlag: ctl.isLoading,
+                        );
+                      }),
                       const Gap(30)
                     ],
                   ),
