@@ -5,12 +5,13 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:websocket_client_flutter/constant/color_palette.dart';
+import 'package:websocket_client_flutter/features/auth/viewModel/login_view_model.dart';
 import 'package:websocket_client_flutter/features/auth/widget/login_text_field.dart';
 import 'package:websocket_client_flutter/features/auth/widget/register_text_button.dart';
 import 'package:websocket_client_flutter/features/auth/widget/submit_button.dart';
 import 'package:websocket_client_flutter/routes/route_path.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends GetView<LoginViewModel> {
   const LoginScreen({super.key});
 
   @override
@@ -52,12 +53,12 @@ class LoginScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             LoginTextField(
-                                controller: TextEditingController(),
+                                controller: controller.getEmailCtl,
                                 label: "Email",
                                 isPassword: false),
                             const Gap(12),
                             LoginTextField(
-                                controller: TextEditingController(),
+                                controller: controller.getPasswordCtl,
                                 label: "Password",
                                 isPassword: true),
                           ],
@@ -73,7 +74,7 @@ class LoginScreen extends StatelessWidget {
                       const Gap(10),
                       SubmitButton(
                         title: "Submit",
-                        onTap: () {},
+                        onTap: controller.onSubmitTap,
                       ),
                       const Gap(30)
                     ],
