@@ -10,8 +10,8 @@ import 'package:websocket_client_flutter/features/auth/widget/register_text_butt
 import 'package:websocket_client_flutter/features/auth/widget/submit_button.dart';
 import 'package:websocket_client_flutter/routes/route_path.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       const Gap(20),
                       Text(
-                        'LOGIN',
+                        'REGISTER',
                         style: GoogleFonts.openSans(
                           fontSize: 28,
                           color: ColorPalette.myGrey[300],
@@ -51,6 +51,11 @@ class LoginScreen extends StatelessWidget {
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            LoginTextField(
+                                controller: TextEditingController(),
+                                label: "User Name",
+                                isPassword: false),
+                            const Gap(12),
                             LoginTextField(
                                 controller: TextEditingController(),
                                 label: "Email",
@@ -66,9 +71,9 @@ class LoginScreen extends StatelessWidget {
                       const Gap(30),
                       RegisterTextButton(
                         onTap: () {
-                          Get.offNamed(RoutePath.register);
+                          Get.offNamed(RoutePath.login);
                         },
-                        title: "I have not account",
+                        title: "I have account",
                       ),
                       const Gap(10),
                       SubmitButton(

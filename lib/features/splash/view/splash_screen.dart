@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:websocket_client_flutter/constant/color_palette.dart';
 import 'package:websocket_client_flutter/features/splash/viewModel/splash_view_model.dart';
 import 'package:websocket_client_flutter/gen/assets.gen.dart';
 
@@ -11,7 +10,6 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorPalette.myGrey[800],
       body: Center(
         child: GetBuilder<SplashViewModel>(builder: (ctl) {
           return Column(

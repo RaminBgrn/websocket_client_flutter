@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http4/http4.dart';
+import 'package:websocket_client_flutter/constant/color_palette.dart';
 import 'package:websocket_client_flutter/routes/route_path.dart';
 import 'package:websocket_client_flutter/routes/routings.dart';
 import 'package:websocket_client_flutter/services/token_service.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        scaffoldBackgroundColor: ColorPalette.myGrey[800],
         useMaterial3: true,
       ),
       initialRoute: RoutePath.splash,
