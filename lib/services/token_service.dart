@@ -1,20 +1,16 @@
-import 'dart:developer';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+class TokenService {
+  static late final SharedPreferences sharedPreferences;
+  static Future<SharedPreferences> init() async =>
+      sharedPreferences = await SharedPreferences.getInstance();
 
-class TokenService extends FlutterSecureStorage {
-  Future<String> readToken() async {
-    final userToken = await read(key: "tokenKey");
-    return (userToken != null && userToken.isNotEmpty) ? userToken : '';
+  Future<String> getAccessToken() async {
+    final accessToken = sharedPreferences.getString('UserToken');
+    return (accessToken != null && accessToken.isNotEmpty) ? accessToken : "";
   }
 
-  Future<bool> writeToken(String token) async {
-    try {
-      await write(key: 'tokenKey', value: token);
-      return true;
-    } catch (e) {
-      log(e.toString());
-      return false;
-    }
+  Future<bool> storeAccessToken(String token) async {
+    return sharedPreferences.setString("UserToken", token);
   }
 }

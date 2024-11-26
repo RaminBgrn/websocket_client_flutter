@@ -25,7 +25,7 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.example.websocket_client_flutter"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -51,6 +51,7 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
+    buildToolsVersion '34.0.0'
 }
 
 flutter {

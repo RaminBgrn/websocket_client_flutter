@@ -5,7 +5,7 @@ import 'package:websocket_client_flutter/constant/color_palette.dart';
 import 'package:websocket_client_flutter/features/splash/viewModel/splash_view_model.dart';
 import 'package:websocket_client_flutter/gen/assets.gen.dart';
 
-class SplashScreen extends GetView<SplashViewModel> {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http4/http4.dart';
 import 'package:websocket_client_flutter/routes/route_path.dart';
 import 'package:websocket_client_flutter/routes/routings.dart';
+import 'package:websocket_client_flutter/services/token_service.dart';
 
 void main() {
+  Http4Config().baseUrl = "http://192.168.1.101:8000/api/";
+  TokenService.init();
   runApp(const MyApp());
 }
 
