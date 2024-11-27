@@ -1,8 +1,17 @@
+import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:websocket_client_flutter/common/validation.dart';
+import 'package:websocket_client_flutter/features/auth/model/auth_model.dart';
+import 'package:websocket_client_flutter/services/auth_services.dart';
 
 class RegisterViewModel extends GetxController {
+  late AuthModel _registerModel;
+  late AuthServices authServices;
+
+  RegisterViewModel({required this.authServices});
+
   bool _loadingFlag = false;
   bool get isLoading => _loadingFlag;
 
@@ -24,6 +33,16 @@ class RegisterViewModel extends GetxController {
     if (!Validation.inputs(true, _passwordCtl, "Password Not Valid",
         "Password should be more than 8 characters")) return;
     _loadingFlag = true;
+    _registerModel = AuthModel(
+        email: _emailCtl.text,
+        password: _passwordCtl.text,
+        userName: _userNameCtl.text);
+    registerUserInServer(_registerModel);
     update();
+  }
+
+  void registerUserInServer(AuthModel model) async {
+    final response = await authServices.register(model);
+    log(response.decodedBody);
   }
 }
