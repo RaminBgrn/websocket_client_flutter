@@ -44,9 +44,6 @@ class RegisterViewModel extends GetxController {
 
   void registerUserInServer(AuthModel model) async {
     final response = await authServices.register(model);
-    log(response.decodedBody['data']);
     TokenService().storeAccessToken(response.decodedBody['data']);
-    String savedToken = await TokenService().getAccessToken();
-    log('Saved token is $savedToken');
   }
 }
