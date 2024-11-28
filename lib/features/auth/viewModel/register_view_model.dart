@@ -1,10 +1,11 @@
-import 'dart:nativewrappers/_internal/vm/lib/developer.dart';
+import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:websocket_client_flutter/common/validation.dart';
 import 'package:websocket_client_flutter/features/auth/model/auth_model.dart';
 import 'package:websocket_client_flutter/services/auth_services.dart';
+import 'package:websocket_client_flutter/services/token_service.dart';
 
 class RegisterViewModel extends GetxController {
   late AuthModel _registerModel;
@@ -43,6 +44,9 @@ class RegisterViewModel extends GetxController {
 
   void registerUserInServer(AuthModel model) async {
     final response = await authServices.register(model);
-    log(response.decodedBody);
+    log(response.decodedBody['data']);
+    TokenService().storeAccessToken(response.decodedBody['data']);
+    String savedToken = await TokenService().getAccessToken();
+    log('Saved token is $savedToken');
   }
 }

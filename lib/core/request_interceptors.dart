@@ -7,10 +7,11 @@ class AuthInterceptor extends InterceptorContract {
   @override
   FutureOr<BaseRequest> interceptRequest({required BaseRequest request}) async {
     final String token = await TokenService().getAccessToken();
+
     request.headers.addAll({
-      'Content-Type': "application/json",
-      'Accept': 'application/json',
-      'Authentication': "Bearer $token"
+      // 'Content-Type': "application/json",
+      'Accept': 'application/json'
+      // 'Authentication': "Bearer $token"
     });
     return Future.value(request);
   }
