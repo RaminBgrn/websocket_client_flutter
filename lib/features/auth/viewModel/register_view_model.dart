@@ -1,9 +1,9 @@
-import 'dart:developer';
-
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:websocket_client_flutter/common/notify_info.dart';
 import 'package:websocket_client_flutter/common/validation.dart';
 import 'package:websocket_client_flutter/features/auth/model/auth_model.dart';
+import 'package:websocket_client_flutter/routes/route_path.dart';
 import 'package:websocket_client_flutter/services/auth_services.dart';
 import 'package:websocket_client_flutter/services/token_service.dart';
 
@@ -44,6 +44,13 @@ class RegisterViewModel extends GetxController {
 
   void registerUserInServer(AuthModel model) async {
     final response = await authServices.register(model);
-    TokenService().storeAccessToken(response.decodedBody['data']);
+    if (await TokenService().storeAccessToken(response.decodedBody['data'])) {
+      Get.offAllNamed(RoutePath.home);
+    }
+    _loadingFlag = false;
+    NotifyInfo.showSnackBar(
+        borderColor: Colors.red,
+        title: 'Register Error',
+        message: 'Something went wrong, Please contact with developer');
   }
 }

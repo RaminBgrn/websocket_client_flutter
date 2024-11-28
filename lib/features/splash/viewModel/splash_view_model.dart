@@ -35,7 +35,7 @@ class SplashViewModel extends GetxController {
   void _checkToken() async {
     final String accessToken = await TokenService().getAccessToken();
     if (accessToken.isNotEmpty) {
-      authServices.login();
+      Get.offAllNamed(RoutePath.home);
     } else {
       Get.offAllNamed(RoutePath.login);
     }
