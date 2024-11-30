@@ -13,4 +13,8 @@ class TokenService {
   Future<bool> storeAccessToken(String token) async {
     return sharedPreferences.setString("UserToken", token);
   }
+
+  Future<bool> removeToken() async {
+    return sharedPreferences.remove('UserToken');
+  }
 }

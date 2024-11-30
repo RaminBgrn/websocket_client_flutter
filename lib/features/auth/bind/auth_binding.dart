@@ -6,7 +6,7 @@ import 'package:websocket_client_flutter/services/auth_services.dart';
 class AuthBinding extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => LoginViewModel());
+    Get.lazyPut(() => LoginViewModel(authServices: AuthServices()));
     Get.lazyPut(() => RegisterViewModel(authServices: AuthServices()));
   }
 }

@@ -44,13 +44,21 @@ class RegisterViewModel extends GetxController {
 
   void registerUserInServer(AuthModel model) async {
     final response = await authServices.register(model);
+    if (!response.isOkey == !response.isSuccessed) {
+      NotifyInfo.showSnackBar(
+          borderColor: Colors.red,
+          title: 'Registration Error',
+          message: 'Something went wrong while register');
+      return;
+    }
     if (await TokenService().storeAccessToken(response.decodedBody['data'])) {
       Get.offAllNamed(RoutePath.home);
+      return;
     }
     _loadingFlag = false;
     NotifyInfo.showSnackBar(
         borderColor: Colors.red,
-        title: 'Register Error',
+        title: 'Token error',
         message: 'Something went wrong, Please contact with developer');
   }
 }

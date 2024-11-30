@@ -22,9 +22,19 @@ class AuthServices extends http4.Http4 {
     }
   }
 
-  Future<Http4Response> login() async {
-    final loginResponse =
-        await post("user_data", interceptors: [AuthInterceptor()]);
+  Future<Http4Response> login(AuthModel model) async {
+    final loginResponse = await post("login", body: {
+      'email': model.email,
+      'password': model.password,
+    }, interceptors: [
+      AuthInterceptor()
+    ]);
     return loginResponse;
+  }
+
+  Future<Http4Response> logOut() async {
+    final logoutResponse =
+        await get('logout', interceptors: [AuthInterceptor()]);
+    return logoutResponse;
   }
 }
