@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:websocket_client_flutter/common/notify_info.dart';
@@ -37,13 +35,14 @@ class LoginViewModel extends GetxController {
 
   void sendLogin(AuthModel model) async {
     final loginResponse = await authServices.login(model);
-    log(loginResponse.httpResponse!.statusCode.toString());
-    log(loginResponse.httpResponse!.body.toString());
-    if (!loginResponse.isOkey && !loginResponse.isSuccessed) {
+    if (loginResponse.httpResponse!.statusCode == 404) {
       NotifyInfo.showSnackBar(
           borderColor: Colors.red,
           title: 'Unauthorized',
           message: 'Email or Password is not correct');
+      _loadingFlag = false;
+      update();
+      return;
     }
     if (await TokenService()
         .storeAccessToken(loginResponse.decodedBody['data'])) {

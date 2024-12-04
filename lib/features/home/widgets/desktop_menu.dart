@@ -64,7 +64,9 @@ class DesktopMenu extends GetView<HomeViewModel> {
             ),
           ),
           MenuItem(
-            onTap: () {},
+            onTap: () {
+              controller.logout();
+            },
             homeViewController: controller,
             icon: Assets.svgs.logout.path,
             selectedPage: PageEnums.logout,

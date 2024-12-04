@@ -11,7 +11,7 @@ class AuthInterceptor extends InterceptorContract {
       'Accept': 'application/json',
     });
     if (token.isNotEmpty) {
-      request.headers.addAll({'Authentication': "Bearer $token"});
+      request.headers.addAll({'Authorization': "Bearer $token"});
     }
     return Future.value(request);
   }

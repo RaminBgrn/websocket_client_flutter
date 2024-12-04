@@ -28,17 +28,24 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/all_users.svg
   SvgGenImage get allUsers => const SvgGenImage('assets/svgs/all_users.svg');
 
+  /// File path: assets/svgs/cancel.svg
+  SvgGenImage get cancel => const SvgGenImage('assets/svgs/cancel.svg');
+
   /// File path: assets/svgs/chats.svg
   SvgGenImage get chats => const SvgGenImage('assets/svgs/chats.svg');
 
   /// File path: assets/svgs/logout.svg
   SvgGenImage get logout => const SvgGenImage('assets/svgs/logout.svg');
 
+  /// File path: assets/svgs/okay.svg
+  SvgGenImage get okay => const SvgGenImage('assets/svgs/okay.svg');
+
   /// File path: assets/svgs/profile.svg
   SvgGenImage get profile => const SvgGenImage('assets/svgs/profile.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [allUsers, chats, logout, profile];
+  List<SvgGenImage> get values =>
+      [allUsers, cancel, chats, logout, okay, profile];
 }
 
 class Assets {
