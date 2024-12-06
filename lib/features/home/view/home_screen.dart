@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:websocket_client_flutter/features/home/widgets/app_bar.dart';
 import 'package:websocket_client_flutter/features/home/widgets/desktop_menu.dart';
 import 'package:websocket_client_flutter/features/home/widgets/menu_content.dart';
 
@@ -7,16 +8,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Row(
-      children: [
-        Stack(
+    return Scaffold(
+        appBar: IAppBar.appBar(context),
+        body: const Row(
           children: [
-            MenuContent(),
-            DesktopMenu(),
+            Stack(
+              children: [
+                MenuContent(),
+                DesktopMenu(),
+              ],
+            )
           ],
-        )
-      ],
-    ));
+        ));
   }
 }
