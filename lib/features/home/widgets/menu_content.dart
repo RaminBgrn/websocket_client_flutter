@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 import 'package:websocket_client_flutter/constant/color_palette.dart';
 
 class MenuContent extends StatelessWidget {
@@ -6,21 +7,37 @@ class MenuContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 400),
-      width: MediaQuery.sizeOf(context).width * 0.2,
+    double maxWidth = 400;
+
+    return Container(
+      width: () {
+        if (ResponsiveBreakpoints.of(context).largerThan(TABLET)) {
+          maxWidth = 400;
+          return MediaQuery.sizeOf(context).width * 0.2;
+        } else {
+          maxWidth = MediaQuery.sizeOf(context).width;
+          return MediaQuery.sizeOf(context).width;
+        }
+      }(),
+      padding: const EdgeInsets.only(left: 70, top: 12, bottom: 12, right: 12),
       constraints: BoxConstraints(
         maxHeight: MediaQuery.sizeOf(context).height,
         minHeight: MediaQuery.sizeOf(context).height,
-        maxWidth: 400,
+        maxWidth: maxWidth,
         minWidth: 300,
       ),
       decoration: BoxDecoration(
         color: ColorPalette.myGrey[900]!,
-        borderRadius: const BorderRadius.only(
-          topRight: Radius.circular(12),
-          bottomRight: Radius.circular(12),
-        ),
+        borderRadius: ResponsiveBreakpoints.of(context).largerThan(TABLET)
+            ? const BorderRadius.only(
+                topRight: Radius.circular(12),
+                bottomRight: Radius.circular(12),
+              )
+            : const BorderRadius.all(Radius.zero),
+      ),
+      child: Text(
+        ResponsiveBreakpoints.of(context).breakpoint.name!,
+        style: const TextStyle(color: Colors.white),
       ),
     );
   }

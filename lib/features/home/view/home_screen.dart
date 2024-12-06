@@ -10,8 +10,12 @@ class HomeScreen extends StatelessWidget {
     return const Scaffold(
         body: Row(
       children: [
-        DesktopMenu(),
-        MenuContent(),
+        Stack(
+          children: [
+            MenuContent(),
+            DesktopMenu(),
+          ],
+        )
       ],
     ));
   }
