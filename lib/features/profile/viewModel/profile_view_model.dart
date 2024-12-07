@@ -10,6 +10,10 @@ class ProfileViewModel extends GetxController {
 
   ProfileModel _userProfile = ProfileModel();
   ProfileModel get getUserProfile => _userProfile;
+  set setProfileModel(Map<String, dynamic> json) {
+    _userProfile = ProfileModel.fromJson(json);
+    update();
+  }
 
   Future<void> getUserData() async {
     final response = await remoteData.fetchUserData();

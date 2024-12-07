@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:websocket_client_flutter/common/notify_info.dart';
 import 'package:websocket_client_flutter/common/validation.dart';
 import 'package:websocket_client_flutter/features/auth/model/auth_model.dart';
+import 'package:websocket_client_flutter/features/profile/viewModel/profile_view_model.dart';
 import 'package:websocket_client_flutter/routes/route_path.dart';
 import 'package:websocket_client_flutter/services/auth_services.dart';
 import 'package:websocket_client_flutter/services/token_service.dart';
@@ -44,14 +47,17 @@ class RegisterViewModel extends GetxController {
 
   void registerUserInServer(AuthModel model) async {
     final response = await authServices.register(model);
-    if (!response.isOkey == !response.isSuccessed) {
+    if (!response.isOkey && !response.isSuccessed) {
       NotifyInfo.showSnackBar(
           borderColor: Colors.red,
           title: 'Registration Error',
           message: 'Something went wrong while register');
       return;
     }
-    if (await TokenService().storeAccessToken(response.decodedBody['data'])) {
+    if (await TokenService()
+        .storeAccessToken(response.decodedBody['data']['token'])) {
+      Get.find<ProfileViewModel>().setProfileModel =
+          response.decodedBody['data']['user'];
       Get.offAllNamed(RoutePath.home);
       return;
     }
