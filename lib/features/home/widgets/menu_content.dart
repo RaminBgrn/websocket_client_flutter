@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:websocket_client_flutter/constant/color_palette.dart';
+import 'package:websocket_client_flutter/features/profile/view/profile_screen.dart';
 
 class MenuContent extends StatelessWidget {
   const MenuContent({super.key});
@@ -45,10 +46,7 @@ class MenuContent extends StatelessWidget {
               )
             : const BorderRadius.all(Radius.zero),
       ),
-      child: Text(
-        ResponsiveBreakpoints.of(context).breakpoint.name!,
-        style: const TextStyle(color: Colors.white),
-      ),
+      child: const ProfileScreen(),
     );
   }
 }
