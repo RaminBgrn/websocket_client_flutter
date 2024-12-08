@@ -20,7 +20,7 @@ class ProfileViewModel extends GetxController {
     if (response.isOkey && response.isSuccessed) {
       _userProfile = ProfileModel.fromJson(response.decodedBody['data']);
       update();
-      Get.offAllNamed(RoutePath.home);
+      Get.offNamed(RoutePath.home);
     }
   }
 }

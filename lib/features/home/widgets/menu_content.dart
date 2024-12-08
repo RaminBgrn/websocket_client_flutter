@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:websocket_client_flutter/constant/color_palette.dart';
-import 'package:websocket_client_flutter/features/profile/view/profile_screen.dart';
+import 'package:websocket_client_flutter/features/home/viewModel/home_view_model.dart';
 
 class MenuContent extends StatelessWidget {
   const MenuContent({super.key});
@@ -46,7 +47,11 @@ class MenuContent extends StatelessWidget {
               )
             : const BorderRadius.all(Radius.zero),
       ),
-      child: const ProfileScreen(),
+      child: GetBuilder<HomeViewModel>(
+        builder: (ctl) {
+          return ctl.getMenuContent;
+        },
+      ),
     );
   }
 }

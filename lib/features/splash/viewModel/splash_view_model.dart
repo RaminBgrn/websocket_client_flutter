@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:websocket_client_flutter/features/profile/viewModel/profile_view_model.dart';
 import 'package:websocket_client_flutter/routes/route_path.dart';
 import 'package:websocket_client_flutter/services/auth_services.dart';
 import 'package:websocket_client_flutter/services/token_service.dart';
@@ -36,7 +35,7 @@ class SplashViewModel extends GetxController {
   void _checkToken() async {
     final String accessToken = await TokenService().getAccessToken();
     if (accessToken.isNotEmpty) {
-      Get.find<ProfileViewModel>().getUserData();
+      Get.offAllNamed(RoutePath.home);
     } else {
       Get.offAllNamed(RoutePath.login);
     }
