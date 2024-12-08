@@ -11,7 +11,8 @@ class AuthServices extends http4.Http4 {
       final response = await post('register', body: {
         "user_name": model.userName,
         "email": model.email,
-        "password": model.password
+        "password": model.password,
+        "avatar": model.avatar,
       }, interceptors: [
         AuthInterceptor(),
       ]);

@@ -18,15 +18,16 @@ class ProfileScreen extends GetView<ProfileViewModel> {
           flex: 1,
           child: SizedBox(),
         ),
-        Image.network(
-          'https://avatar.iran.liara.run/public',
-          width: 160,
-          height: 160,
-        ),
-        const Gap(18),
         GetBuilder<ProfileViewModel>(builder: (ctl) {
           return Column(
             children: [
+              Image.network(
+                ctl.getUserProfile.avatar ??
+                    "https://avatar.iran.liara.run/public/",
+                width: 160,
+                height: 160,
+              ),
+              const Gap(18),
               Text(
                 ctl.getUserProfile.userName ?? 'Unknown',
                 style: GoogleFonts.openSans(

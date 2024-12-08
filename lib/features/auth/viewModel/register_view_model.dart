@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:websocket_client_flutter/common/notify_info.dart';
@@ -26,6 +28,11 @@ class RegisterViewModel extends GetxController {
   final TextEditingController _passwordCtl = TextEditingController();
   TextEditingController get getPasswordCtl => _passwordCtl;
 
+  String _userAvatar = "https://avatar.iran.liara.run/public/";
+  String get getUserAvatar => _userAvatar;
+
+  String _gender = "boy";
+
   void onSubmit() {
     if (!Validation.inputs(true, _userNameCtl, "User Name To Short",
         'User name should be more then 3 characters',
@@ -38,8 +45,29 @@ class RegisterViewModel extends GetxController {
     _registerModel = AuthModel(
         email: _emailCtl.text,
         password: _passwordCtl.text,
-        userName: _userNameCtl.text);
+        userName: _userNameCtl.text,
+        avatar: _userAvatar);
     registerUserInServer(_registerModel);
+    update();
+  }
+
+  void refreshAvatarImage() {
+    String avatarId = "random";
+    const chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    Random rnd = Random();
+
+    avatarId = String.fromCharCodes(
+      Iterable.generate(
+        10,
+        (_) => chars.codeUnitAt(
+          rnd.nextInt(chars.length),
+        ),
+      ),
+    );
+    _gender == "boy" ? _gender = 'girl' : _gender = 'boy';
+    _userAvatar =
+        'https://avatar.iran.liara.run/public/$_gender?username=$avatarId';
     update();
   }
 

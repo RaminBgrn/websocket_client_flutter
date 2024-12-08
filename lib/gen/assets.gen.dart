@@ -43,9 +43,12 @@ class $AssetsSvgsGen {
   /// File path: assets/svgs/profile.svg
   SvgGenImage get profile => const SvgGenImage('assets/svgs/profile.svg');
 
+  /// File path: assets/svgs/refresh.svg
+  SvgGenImage get refresh => const SvgGenImage('assets/svgs/refresh.svg');
+
   /// List of all assets
   List<SvgGenImage> get values =>
-      [allUsers, cancel, chats, logout, okay, profile];
+      [allUsers, cancel, chats, logout, okay, profile, refresh];
 }
 
 class Assets {

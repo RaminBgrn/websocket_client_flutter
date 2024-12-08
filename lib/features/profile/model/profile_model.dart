@@ -3,12 +3,14 @@ class ProfileModel {
   String? uuid;
   String? userName;
   String? mail;
+  String? avatar;
 
   ProfileModel({
     this.id,
     this.uuid,
     this.userName,
     this.mail,
+    this.avatar,
   });
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
@@ -16,5 +18,6 @@ class ProfileModel {
     uuid = json['uuid'];
     userName = json['name'];
     mail = json['email'];
+    avatar = json['avatar'];
   }
 }
