@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:websocket_client_flutter/common/notify_info.dart';
 import 'package:websocket_client_flutter/common/validation.dart';
 import 'package:websocket_client_flutter/features/auth/model/auth_model.dart';
-import 'package:websocket_client_flutter/features/profile/viewModel/profile_view_model.dart';
 import 'package:websocket_client_flutter/routes/route_path.dart';
 import 'package:websocket_client_flutter/services/auth_services.dart';
 import 'package:websocket_client_flutter/services/token_service.dart';
@@ -28,10 +27,10 @@ class RegisterViewModel extends GetxController {
   final TextEditingController _passwordCtl = TextEditingController();
   TextEditingController get getPasswordCtl => _passwordCtl;
 
-  String _userAvatar = "https://avatar.iran.liara.run/public/";
-  String get getUserAvatar => _userAvatar;
+  late String _gender;
 
-  String _gender = "boy";
+  late String _userAvatar;
+  String get getUserAvatar => _userAvatar;
 
   void onSubmit() {
     if (!Validation.inputs(true, _userNameCtl, "User Name To Short",
@@ -93,5 +92,13 @@ class RegisterViewModel extends GetxController {
         borderColor: Colors.red,
         title: 'Token error',
         message: 'Something went wrong, Please contact with developer');
+  }
+
+  @override
+  void onInit() {
+    _gender = 'boy';
+    _userAvatar =
+        "https://avatar.iran.liara.run/public/$_gender?username=raminDev";
+    super.onInit();
   }
 }
