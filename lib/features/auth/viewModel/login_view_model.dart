@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:websocket_client_flutter/common/notify_info.dart';
@@ -35,6 +37,7 @@ class LoginViewModel extends GetxController {
 
   void sendLogin(AuthModel model) async {
     final loginResponse = await authServices.login(model);
+
     if (loginResponse.httpResponse!.statusCode == 404) {
       NotifyInfo.showSnackBar(
           borderColor: Colors.red,
@@ -45,8 +48,9 @@ class LoginViewModel extends GetxController {
       return;
     }
     if (await TokenService()
-        .storeAccessToken(loginResponse.decodedBody['data'])) {
-      Get.offAllNamed(RoutePath.home);
+        .storeAccessToken(loginResponse.decodedBody['data']['token'])) {
+      Get.offAllNamed(RoutePath.home,
+          arguments: loginResponse.decodedBody['data']['user']);
       return;
     }
     NotifyInfo.showSnackBar(

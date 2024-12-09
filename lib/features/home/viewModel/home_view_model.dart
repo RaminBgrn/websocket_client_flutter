@@ -35,7 +35,11 @@ class HomeViewModel extends GetxController {
 
   @override
   void onReady() {
-    Get.find<ProfileViewModel>().getUserData();
+    final userData = Get.arguments;
+    if (userData != null) {
+      Get.find<ProfileViewModel>().setProfileModel = userData;
+      return;
+    }
     super.onReady();
   }
 

@@ -82,9 +82,10 @@ class RegisterViewModel extends GetxController {
     }
     if (await TokenService()
         .storeAccessToken(response.decodedBody['data']['token'])) {
-      Get.find<ProfileViewModel>().setProfileModel =
-          response.decodedBody['data']['user'];
-      Get.offAllNamed(RoutePath.home);
+      // Get.find<ProfileViewModel>().setProfileModel =
+      //     response.decodedBody['data']['user'];
+      Get.offAllNamed(RoutePath.home,
+          arguments: response.decodedBody['data']['user']);
       return;
     }
     _loadingFlag = false;

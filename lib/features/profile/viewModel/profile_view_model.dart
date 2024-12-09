@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import 'package:websocket_client_flutter/features/profile/data/user_data_remote.dart';
 import 'package:websocket_client_flutter/features/profile/model/profile_model.dart';
-import 'package:websocket_client_flutter/routes/route_path.dart';
 
 class ProfileViewModel extends GetxController {
   late UserDataRemote remoteData;
@@ -20,7 +19,12 @@ class ProfileViewModel extends GetxController {
     if (response.isOkey && response.isSuccessed) {
       _userProfile = ProfileModel.fromJson(response.decodedBody['data']);
       update();
-      Get.offNamed(RoutePath.home);
     }
+  }
+
+  @override
+  void onReady() {
+    getUserData();
+    super.onReady();
   }
 }

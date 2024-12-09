@@ -13,6 +13,7 @@ class AllUsersViewModel extends GetxController {
   Future<void> fetchAllUsers() async {
     _allUsersModel.clear();
     final allUserResponse = await allUserRemote.fetchAllUsers();
+
     for (final user in allUserResponse.decodedBody['data']) {
       _allUsersModel.add(AllUsersModel.fromJson(user));
     }
